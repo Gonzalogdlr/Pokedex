@@ -1,5 +1,5 @@
 import "./App.css";
-import Card from "./components/Card/Card.js";
+import Card from "./components/Card.js";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Pagination from "./components/Pagination";
 const queryClient = new QueryClient();

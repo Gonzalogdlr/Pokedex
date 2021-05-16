@@ -5,23 +5,9 @@ import {
   faLongArrowAltRight,
   faLongArrowAltLeft,
 } from "@fortawesome/free-solid-svg-icons";
+import {fetcher} from "../helpers/fetch"
+import {capitalize, shuffleArray} from "../helpers/helpers"
 
-async function fetcher(param) {
-  let url = param.queryKey[0];
-  const response = await fetch(url);
-  return response.json();
-}
-function capitalize(value) {
-  return value.charAt(0).toUpperCase() + value.slice(1);
-}
-function shuffleArray(array) {
-  let newArray = array;
-  for (let i = newArray.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-  }
-  return newArray;
-}
 export default function Card() {
   const [id, setId] = useState(1);
   const { data, isLoading } = useQuery(

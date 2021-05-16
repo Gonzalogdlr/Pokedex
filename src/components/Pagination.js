@@ -1,15 +1,10 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 
-import JsonData from "../MOCK_DATA.json";
 import ReactPaginate from "react-paginate";
 import Minicard from "./Minicard";
+import { fetcher } from "../helpers/fetch";
 
-async function fetcher(param) {
-  let url = param.queryKey[0];
-  const response = await fetch(url);
-  return response.json();
-}
 export default function Pagination() {
   const { data, isLoading } = useQuery(
     `https://pokeapi.co/api/v2/pokemon?limit=151&offset=0`,
@@ -33,12 +28,14 @@ export default function Pagination() {
     );
   }
   return (
-    <div>
-      {data.results
-        .slice(pagesVisited, pagesVisited + userPerPage)
-        .map((pokemon) => {
-          return <Minicard name={pokemon.name} image={pokemon.url} />;
-        })}
+    <div className={"flex flex-col w-96"}>
+      <div className={"grid grid-flow-row grid-cols-3 grid-rows-3 gap-2"}>
+        {data.results
+          .slice(pagesVisited, pagesVisited + userPerPage)
+          .map((pokemon) => {
+            return <Minicard name={pokemon.name} image={pokemon.url} />;
+          })}
+      </div>
       <ReactPaginate
         previousLabel={"Anterior"}
         nextLabel={"Siguiente Gil"}
