@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "react-query";
-import {fetcher} from "../helpers/fetch"
-import {capitalize} from "../helpers/helpers"
+import { fetcher } from "../helpers/fetch";
+import { capitalize } from "../helpers/helpers";
 export default function Minicard({ name, image }) {
   const { data, isLoading } = useQuery(image, fetcher);
   if (isLoading) {
@@ -9,8 +9,10 @@ export default function Minicard({ name, image }) {
   }
   return (
     <div className={"flex flex-col items-center w-20 "}>
-      <img src={data.sprites.front_default}/>
-      <h1>{capitalize(name)}</h1>
+      <img src={data.sprites.front_default} />
+      <div className={"border border-black rounded-xl px-2"}>
+        <h1>{capitalize(name)}</h1>
+      </div>
     </div>
   );
 }

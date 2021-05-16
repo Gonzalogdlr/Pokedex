@@ -6,9 +6,10 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Pagination></Pagination>
+      <div className={"relative h-screen max-w-md m-auto overflow-auto bg-black"}>
+        <Pagination></Pagination>
+      </div >
     </QueryClientProvider>
   );
 }
-
 export default App;

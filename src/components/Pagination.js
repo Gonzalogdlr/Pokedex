@@ -11,7 +11,7 @@ export default function Pagination() {
     fetcher
   );
   const [pageNumber, setPageNumber] = useState(0);
-  const userPerPage = 18;
+  const userPerPage = 9;
   const pagesVisited = pageNumber * userPerPage;
 
   const pageCount = Math.ceil(151 / userPerPage);
@@ -28,8 +28,8 @@ export default function Pagination() {
     );
   }
   return (
-    <div className={"flex flex-col w-96"}>
-      <div className={"grid grid-flow-row grid-cols-3 grid-rows-3 gap-2"}>
+    <div className={"flex flex-col bg-pokedexList bg-cover bg-center h-full justify-center items-center"}>
+      <div className={"grid grid-flow-row grid-cols-3 grid-rows-3 gap-10"}>
         {data.results
           .slice(pagesVisited, pagesVisited + userPerPage)
           .map((pokemon) => {
@@ -37,10 +37,11 @@ export default function Pagination() {
           })}
       </div>
       <ReactPaginate
-        previousLabel={"Anterior"}
-        nextLabel={"Siguiente Gil"}
+        previousLabel={"<-"}
+        nextLabel={"->"}
         pageCount={pageCount}
         onPageChange={changePage}
+        containerClassName={"flex gap-4"}
       />
     </div>
   );

@@ -6,7 +6,8 @@ module.exports = {
       backgroundImage: theme => ({
         'forest': "url('/src/assets/images/PokeForest.png')",
         'back': "url('/src/assets/images/Back.png')",
-        'pokedex': "url('/src/assets/images/Pokedex.png')"
+        'pokedex': "url('/src/assets/images/Pokedex.png')",
+        'pokedexList': "url('/src/assets/images/PokedexList.png')",
       })
     },
   },
