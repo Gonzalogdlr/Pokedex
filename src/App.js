@@ -1,13 +1,13 @@
-import './App.css';
-import Card from './components/Card/Card.js'
-
-
+import "./App.css";
+import Card from "./components/Card/Card.js";
+import { QueryClient, QueryClientProvider } from "react-query";
+import Pagination from "./components/Pagination";
+const queryClient = new QueryClient();
 function App() {
   return (
-   <div >
-     <h3>Pokedex</h3>
-     <Card/>
-   </div>
+    <QueryClientProvider client={queryClient}>
+      <Pagination></Pagination>
+    </QueryClientProvider>
   );
 }
 
