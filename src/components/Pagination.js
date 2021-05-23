@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faLongArrowAltLeft,
+  faLongArrowAltRight,
+} from "@fortawesome/free-solid-svg-icons";
 import ReactPaginate from "react-paginate";
 import Minicard from "./Minicard";
 import { fetcher } from "../helpers/fetch";
@@ -34,7 +39,7 @@ export default function Pagination() {
         "flex flex-col bg-pokedexList bg-cover bg-center h-full justify-center items-center "
       }
     >
-      <div className={"grid grid-flow-row grid-cols-3 grid-rows-3 gap-10"}>
+      <div className={"grid grid-flow-row grid-cols-3 grid-rows-3 gap-8 "}>
         {data.results
           .slice(pagesVisited, pagesVisited + userPerPage)
           .map((pokemon) => {
@@ -46,11 +51,22 @@ export default function Pagination() {
           })}
       </div>
       <ReactPaginate
-        previousLabel={"<-"}
-        nextLabel={"->"}
+        previousLabel={
+          <FontAwesomeIcon
+            className={" text-yellow-400 hover:text-red-500"}
+            icon={faLongArrowAltLeft}
+          />
+        }
+        nextLabel={
+          <FontAwesomeIcon
+            className={" text-yellow-400 hover:text-red-500"}
+            icon={faLongArrowAltRight}
+          />
+        }
         pageCount={pageCount}
+        marginPagesDisplayed={1}
         onPageChange={changePage}
-        containerClassName={"flex gap-4"}
+        containerClassName={"flex w-full px-8 py-4 justify-between"}
       />
     </div>
   );

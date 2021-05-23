@@ -3,6 +3,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      animation: {
+        'bounce-short': 'bounce 2s infinite'
+      },
       backgroundImage: theme => ({
         'forest'     : "url('/src/assets/images/PokeForest.png')",
         'back'       : "url('/src/assets/images/Back.png')",
@@ -12,6 +15,7 @@ module.exports = {
     },
   },
   variants: {
+    animation: ['responsive', 'motion-safe', 'motion-reduce'],
     extend: {},
   },
   plugins: [],
