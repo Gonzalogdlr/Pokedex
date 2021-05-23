@@ -5,81 +5,81 @@ import {
   faLongArrowAltRight,
   faLongArrowAltLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import {fetcher} from "../helpers/fetch"
-import {capitalize, shuffleArray} from "../helpers/helpers"
+import { fetcher } from "../helpers/fetch";
+import { capitalize, shuffleArray, types } from "../helpers/helpers";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Card() {
-  const [id, setId] = useState(1);
+  const { name } = useParams();
   const { data, isLoading } = useQuery(
-    `https://pokeapi.co/api/v2/pokemon/${id}`,
+    `https://pokeapi.co/api/v2/pokemon/${name}`,
     fetcher
   );
-  function nextPokemon() {
-    let nextId = id + 1;
-    setId(nextId);
-  }
-  function prevPokemon() {
-    let nextId = id - 1;
-    setId(nextId);
-  }
 
   if (isLoading) {
     return (
-      <div
-        className={
-          "bg-back bg-cover bg-center w-80 pt-2 px-4 h-72 border-2 border-black rounded-xl"
-        }
-      ></div>
+      <div className={"bg-forest bg-cover h-full  pt-2 px-4 rounded-xl"}></div>
     );
   }
   return (
-    <div
-      className={
-        "bg-back bg-cover bg-center w-80 pt-2 px-4 h-72 border-2 border-black rounded-xl"
-      }
-    >
-      <div className={"flex flex-row justify-between"}>
-        {id == 1 ? (
-          <div>
-            <FontAwesomeIcon icon={faLongArrowAltLeft} color={"transparent"} />
+    <div className={"bg-forest bg-cover h-full  pt-2 px-4 rounded-xl"}>
+      <div className={"flex flex-row items-center gap-5"}>
+        <Link to={`/`}>
+          <FontAwesomeIcon icon={faLongArrowAltLeft} color={"gold"} />
+        </Link>
+        <div className={"flex gap-4 py-6"}>
+          <h3 className={"text-white font-serif text-3xl font-bold"}>
+            {capitalize(data.name)}
+          </h3>
+
+          <h3 className={"text-white font-serif text-3xl font-bold"}>
+            #{data.id}
+          </h3>
+          <div className={"flex gap-2"}>
+            {data.types.map((e) => {
+              return (
+                <div
+                  className={`${types(
+                    e.type.name
+                  )} flex items-center px-4 rounded-xl border-black border`}
+                >
+                  <h3 className={"text-white font-serif font-bold"}>
+                    {capitalize(e.type.name)}
+                  </h3>
+                </div>
+              );
+            })}
           </div>
-        ) : (
-          <button onClick={prevPokemon}>
-            <FontAwesomeIcon icon={faLongArrowAltLeft} color={"gold"}/>
-          </button>
-        )}
-        <div>
-          <h3 className={"text-white font-serif"}>{capitalize(data.name)}</h3>
         </div>
-        {id == 151 ? (
-          <div>
-            <FontAwesomeIcon icon={faLongArrowAltRight} color={"transparent"} />
-          </div>
-        ) : (
-          <button onClick={nextPokemon}>
-            <FontAwesomeIcon icon={faLongArrowAltRight} color={"gold"}/>
-          </button>
-        )}
       </div>
-      <div
-        className={
-          "flex justify-center border-black border-2 bg-cover h-24 bg-forest rounded-xl"
-        }
-      >
-        <img src={data.sprites.front_default} />
+      <div className="flex justify-center gap-2">
+        <img
+          className="border border-white rounded-xl"
+          src={data.sprites.front_default}
+        />
+        <img
+          className="border border-white rounded-xl"
+          src={data.sprites.back_default}
+        />
+        <img
+          className="border border-white rounded-xl"
+          src={data.sprites.front_shiny}
+        />
+        <img
+          className="border border-white rounded-xl"
+          src={data.sprites.back_shiny}
+        />
       </div>
-      <div className={"flex justify-between"}>
-        <div className={"flex gap-2 w-10"}>
-          {data.types.map((e) => {
-            return <h3 className={"text-white font-serif"}>{capitalize(e.type.name)}</h3>;
-          })}
-        </div>
-        <h3 className={"text-white font-serif"}>#{id}</h3>
-      </div>
-      {shuffleArray(data.moves)
-        .slice(0, 4)
+      <p className={"text-xl text-white font-serif"}>Movements:</p>
+      {data.moves
+        .slice(0, 10)
         .map((e) => {
-          return <h3 className={"text-white font-serif"}>- {capitalize(e.move.name)}</h3>;
+          return (
+            <h3 className={"text-white font-serif px-8"}>
+              - {capitalize(e.move.name)}
+            </h3>
+          );
         })}
     </div>
   );

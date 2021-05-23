@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import ReactPaginate from "react-paginate";
 import Minicard from "./Minicard";
 import { fetcher } from "../helpers/fetch";
+import { Link } from "react-router-dom";
 
 export default function Pagination() {
   const { data, isLoading } = useQuery(
@@ -28,12 +29,20 @@ export default function Pagination() {
     );
   }
   return (
-    <div className={"flex flex-col bg-pokedexList bg-cover bg-center h-full justify-center items-center"}>
+    <div
+      className={
+        "flex flex-col bg-pokedexList bg-cover bg-center h-full justify-center items-center "
+      }
+    >
       <div className={"grid grid-flow-row grid-cols-3 grid-rows-3 gap-10"}>
         {data.results
           .slice(pagesVisited, pagesVisited + userPerPage)
           .map((pokemon) => {
-            return <Minicard name={pokemon.name} image={pokemon.url} />;
+            return (
+              <Link to={`/pokemon/${pokemon.name}`}>
+                <Minicard name={pokemon.name} image={pokemon.url} />
+              </Link>
+            );
           })}
       </div>
       <ReactPaginate
