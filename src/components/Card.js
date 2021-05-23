@@ -1,20 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faLongArrowAltLeft,
-} from "@fortawesome/free-solid-svg-icons";
+import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
 import { fetcher } from "../helpers/fetch";
 import { capitalize, types } from "../helpers/helpers";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
+function formatNumber(number) {
+  return number < 10 ? "00" + number : number < 100 ? "0" + number : number;
+}
 export default function Card() {
   const { name } = useParams();
+  const [urlId, setUrlID] = useState("");
   const { data, isLoading } = useQuery(
     `https://pokeapi.co/api/v2/pokemon/${name}`,
     fetcher
   );
+  useEffect(() => {
+    if (!isLoading) {
+      setUrlID(formatNumber(data.id));
+    }
+  }, [data]);
 
   if (isLoading) {
     return (
@@ -22,12 +29,12 @@ export default function Card() {
     );
   }
   return (
-    <div className={"bg-forest bg-cover h-full  pt-2 px-4 rounded-xl"}>
-      <div className={"flex flex-row items-center gap-5"}>
-        <Link to={`/`}>
-          <FontAwesomeIcon icon={faLongArrowAltLeft} color={"gold"} />
-        </Link>
-        <div className={"flex gap-4 py-6"}>
+    <div className={"bg-pokedexList bg-cover bg-center h-full  pt-2 px-4 rounded-xl"}>
+      <Link to={`/`}>
+        <FontAwesomeIcon icon={faLongArrowAltLeft} color={"gold"} />
+      </Link>
+      <div className={"bg-forest  bg-cover"}>
+        <div className={" flex justify-center items-center gap-3 mt-56 "}>
           <h3 className={"text-white font-serif text-3xl font-bold"}>
             {capitalize(data.name)}
           </h3>
@@ -35,6 +42,13 @@ export default function Card() {
           <h3 className={"text-white font-serif text-3xl font-bold"}>
             #{data.id}
           </h3>
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          <img
+            className={"h-44 w-44"}
+            src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${urlId}.png`}
+            alt="Pokemon :D"
+          />
           <div className={"flex gap-2"}>
             {data.types.map((e) => {
               return (
@@ -52,38 +66,14 @@ export default function Card() {
           </div>
         </div>
       </div>
-      <div className="flex justify-center gap-2">
-        <img
-          className="border border-white rounded-xl"
-          src={data.sprites.front_default}
-            alt="Pokemon :D"
-        />
-        <img
-          className="border border-white rounded-xl"
-          src={data.sprites.back_default}
-            alt="Pokemon :D"
-        />
-        <img
-          className="border border-white rounded-xl"
-          src={data.sprites.front_shiny}
-            alt="Pokemon :D"
-        />
-        <img
-          className="border border-white rounded-xl"
-          src={data.sprites.back_shiny}
-            alt="Pokemon :D"
-        />
-      </div>
-      <p className={"text-xl text-white font-serif"}>Movements:</p>
-      {data.moves
-        .slice(0, 10)
-        .map((e) => {
-          return (
-            <h3 className={"text-white font-serif px-8"}>
-              - {capitalize(e.move.name)}
-            </h3>
-          );
-        })}
+      {/* <p className={"text-xl text-white font-serif"}>Movements:</p>
+      {data.moves.slice(0, 10).map((e) => {
+        return (
+          <h3 className={"text-white font-serif px-8"}>
+            - {capitalize(e.move.name)}
+          </h3>
+        );
+      })} */}
     </div>
   );
 }
