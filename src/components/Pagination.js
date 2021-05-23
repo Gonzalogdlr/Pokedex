@@ -10,8 +10,8 @@ import { Link } from "react-router-dom";
 import PokedexContainer from "./PokedexContainer";
 
 export default function Pagination() {
-  const [number, setNumber] = useState("")
-  const [numberStart, setNumberStart] = useState("")
+  const [number, setNumber] = useState("");
+  const [numberStart, setNumberStart] = useState("");
   const { data, isLoading } = useQuery(
     `https://pokeapi.co/api/v2/pokemon?limit=${number}&offset=${numberStart}`,
     fetcher
@@ -26,13 +26,7 @@ export default function Pagination() {
     setPageNumber(selected);
   };
   if (isLoading) {
-    return (
-      <div
-        className={
-          "bg-back bg-cover bg-center w-80 pt-2 px-4 h-72 border-2 border-black rounded-xl"
-        }
-      ></div>
-    );
+    return <PokedexContainer></PokedexContainer>;
   }
   function toggle() {
     setEnabled(!enabled);
@@ -81,36 +75,65 @@ export default function Pagination() {
     <PokedexContainer>
       {enabled === false ? (
         <div className="flex flex-wrap w-full gap-3 px-6 justify-center">
-          <button onClick={Kanto} className="border  bg-red-800 text-yellow-500 hover:bg-yellow-500 hover:text-red-800 p-5 font-bold rounded-xl">
+          <button
+            onClick={Kanto}
+            className="border  bg-red-800 text-yellow-500 hover:bg-yellow-500 hover:text-red-800 p-5 font-bold rounded-xl"
+          >
             Kanto
           </button>
-          <button onClick={Jhoto} className="border  bg-red-800 text-yellow-500 hover:bg-yellow-500 hover:text-red-800 p-5 font-bold rounded-xl">
+          <button
+            onClick={Jhoto}
+            className="border  bg-red-800 text-yellow-500 hover:bg-yellow-500 hover:text-red-800 p-5 font-bold rounded-xl"
+          >
             Jhoto
           </button>
-          <button onClick={Hoenn} className="border  bg-red-800 text-yellow-500 hover:bg-yellow-500 hover:text-red-800 p-5 font-bold rounded-xl">
+          <button
+            onClick={Hoenn}
+            className="border  bg-red-800 text-yellow-500 hover:bg-yellow-500 hover:text-red-800 p-5 font-bold rounded-xl"
+          >
             Hoenn
           </button>
-          <button onClick={Sinnoh} className="border  bg-red-800 text-yellow-500 hover:bg-yellow-500 hover:text-red-800 p-5 font-bold rounded-xl">
+          <button
+            onClick={Sinnoh}
+            className="border  bg-red-800 text-yellow-500 hover:bg-yellow-500 hover:text-red-800 p-5 font-bold rounded-xl"
+          >
             Sinoh
           </button>
-          <button onClick={Unova}
+          <button
+            onClick={Unova}
             className="border  bg-red-800 text-yellow-500 hover:bg-yellow-500 hover:text-red-800 p-5 font-bold rounded-xl"
           >
             Teselia
           </button>
-          <button onClick={Kalos} className="border  bg-red-800 text-yellow-500 hover:bg-yellow-500 hover:text-red-800 font-bold p-5 rounded-xl">
+          <button
+            onClick={Kalos}
+            className="border  bg-red-800 text-yellow-500 hover:bg-yellow-500 hover:text-red-800 font-bold p-5 rounded-xl"
+          >
             Kalos
           </button>
-          <button onClick={Alolah} className="border  bg-red-800 text-yellow-500 hover:bg-yellow-500 hover:text-red-800 font-bold p-5 rounded-xl">
+          <button
+            onClick={Alolah}
+            className="border  bg-red-800 text-yellow-500 hover:bg-yellow-500 hover:text-red-800 font-bold p-5 rounded-xl"
+          >
             Alolah
           </button>
-          <button onClick={Galar} className="border  bg-red-800 text-yellow-500 hover:bg-yellow-500 hover:text-red-800 font-bold p-5 rounded-xl">
+          <button
+            onClick={Galar}
+            className="border  bg-red-800 text-yellow-500 hover:bg-yellow-500 hover:text-red-800 font-bold p-5 rounded-xl"
+          >
             Galar
           </button>
         </div>
       ) : (
         <>
-          <button className={"border ml-5 self-start bg-yellow-500 text-red-800 hover:bg-white hover:text-black px-8 rounded-2xl rounded-l-none mb-4 font-bold font-serif"} onClick={toggle}>Return</button>
+          <button
+            className={
+              "border ml-5 self-start bg-yellow-500 text-red-800 hover:bg-white hover:text-black px-8 rounded-2xl rounded-l-none mb-4 font-bold font-serif"
+            }
+            onClick={toggle}
+          >
+            Return
+          </button>
           <div className={"grid grid-flow-row grid-cols-3 grid-rows-3 gap-8 "}>
             {data.results
               .slice(pagesVisited, pagesVisited + pokemonPerPage)

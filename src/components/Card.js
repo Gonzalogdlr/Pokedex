@@ -18,7 +18,7 @@ export default function Card() {
 
   if (isLoading) {
     return (
-      <div className={"bg-forest bg-cover h-full  pt-2 px-4 rounded-xl"}></div>
+      <PokedexContainer></PokedexContainer>
     );
   }
   return (
