@@ -7,6 +7,7 @@ import ReactPaginate from "react-paginate";
 import Minicard from "./Minicard";
 import { fetcher } from "../helpers/fetch";
 import { Link } from "react-router-dom";
+import PokedexContainer from "./PokedexContainer";
 
 export default function Pagination() {
   const [number, setNumber] = useState("")
@@ -77,11 +78,7 @@ export default function Pagination() {
     toggle();
   }
   return (
-    <div
-      className={
-        "flex flex-col bg-pokedexList bg-cover bg-center h-full justify-center items-center "
-      }
-    >
+    <PokedexContainer>
       {enabled === false ? (
         <div className="flex flex-wrap w-full gap-3 px-6 justify-center">
           <button onClick={Kanto} className="border  bg-red-800 text-yellow-500 hover:bg-yellow-500 hover:text-red-800 p-5 font-bold rounded-xl">
@@ -148,6 +145,6 @@ export default function Pagination() {
           />
         </>
       )}
-    </div>
+    </PokedexContainer>
   );
 }
