@@ -82,7 +82,7 @@ export default function Pagination() {
         "flex flex-col bg-pokedexList bg-cover bg-center h-full justify-center items-center "
       }
     >
-      {enabled == false ? (
+      {enabled === false ? (
         <div className="flex flex-wrap w-full gap-3 px-6 justify-center">
           <button onClick={Kanto} className="border  bg-red-800 text-yellow-500 hover:bg-yellow-500 hover:text-red-800 p-5 font-bold rounded-xl">
             Kanto
