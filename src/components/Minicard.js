@@ -9,7 +9,7 @@ export default function Minicard({ name, image }) {
   }
   return (
     <div className={"flex flex-col items-center w-20 "}>
-      <img src={data.sprites.front_default} />
+      <img src={data.sprites.front_default} alt="Pokemon"/>
       <div className={"border border-black rounded-xl px-2"}>
         <h1>{capitalize(name)}</h1>
       </div>

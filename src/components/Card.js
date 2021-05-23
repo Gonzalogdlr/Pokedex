@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useQuery } from "react-query";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faLongArrowAltRight,
   faLongArrowAltLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { fetcher } from "../helpers/fetch";
-import { capitalize, shuffleArray, types } from "../helpers/helpers";
+import { capitalize, types } from "../helpers/helpers";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -57,18 +56,22 @@ export default function Card() {
         <img
           className="border border-white rounded-xl"
           src={data.sprites.front_default}
+            alt="Pokemon :D"
         />
         <img
           className="border border-white rounded-xl"
           src={data.sprites.back_default}
+            alt="Pokemon :D"
         />
         <img
           className="border border-white rounded-xl"
           src={data.sprites.front_shiny}
+            alt="Pokemon :D"
         />
         <img
           className="border border-white rounded-xl"
           src={data.sprites.back_shiny}
+            alt="Pokemon :D"
         />
       </div>
       <p className={"text-xl text-white font-serif"}>Movements:</p>
