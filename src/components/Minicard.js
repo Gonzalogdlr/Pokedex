@@ -24,10 +24,10 @@ export default function Minicard({ name, image }) {
       <img className={"animate-bounce-short"} src={data.sprites.front_default} alt="Pokemon" />
       <div
         className={
-          " flex justify-center border border-black rounded-xl w-24 px-2 bg-red-800 text-yellow-500 hover:bg-yellow-500 hover:text-red-800"
+          "flex justify-center border border-black rounded-xl w-24 px-2 bg-red-800 text-yellow-500 hover:bg-yellow-500 hover:text-red-800"
         }
       >
-        <h1>{capitalize(name)}</h1>
+        <h1 className="font-serif font-bold">{capitalize(name.split("-")[0])}</h1>
       </div>
     </div>
   );
